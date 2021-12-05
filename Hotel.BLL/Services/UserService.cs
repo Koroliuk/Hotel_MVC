@@ -22,7 +22,7 @@ namespace Hotel.BLL.Services
                 userDto.Role == null || userDto.Role.Equals(string.Empty))
             {
                 throw new HotelException("Invalid input");
-            }
+            }  
             if (userDto.Role != "Admin" && userDto.Role != "User")
             {
                 throw new HotelException("Invalid user role");
