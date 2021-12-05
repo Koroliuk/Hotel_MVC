@@ -5,18 +5,19 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EE7FFDAF-F09C-4106-A1DA-D60B0AFA0730}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hotel.BLL</RootNamespace>
-    <AssemblyName>Hotel.BLL</AssemblyName>
+    <ProjectGuid>{F1EF009D-EDF4-4F39-8484-67E18B9743CD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Hotel.PL</RootNamespace>
+    <AssemblyName>Hotel.PL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,16 +25,15 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -87,31 +87,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="DTO\RoomCategoryDto.cs" />
-    <Compile Include="DTO\RoomDto.cs" />
-    <Compile Include="DTO\UserDto.cs" />
-    <Compile Include="Interfaces\IOrderService.cs" />
-    <Compile Include="Interfaces\IRoomCategoryService.cs" />
-    <Compile Include="Interfaces\IRoomService.cs" />
-    <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Controllers\Account\SignUp.cs" />
+    <Compile Include="Controllers\Command.cs" />
+    <Compile Include="Controllers\Commander.cs" />
+    <Compile Include="Controllers\Order\BookRoom.cs" />
+    <Compile Include="Controllers\Order\RentRoom.cs" />
+    <Compile Include="Controllers\Order\ShowRooms.cs" />
+    <Compile Include="Controllers\Order\TransformStateOfRoom.cs" />
+    <Compile Include="Controllers\RoomCategory\CreateRoomCategory.cs" />
+    <Compile Include="Controllers\RoomCategory\DeleteRoomCategory.cs" />
+    <Compile Include="Controllers\RoomCategory\EditRoomCategory.cs" />
+    <Compile Include="Controllers\Room\CreateRoom.cs" />
+    <Compile Include="Controllers\Room\DeleteRoom.cs" />
+    <Compile Include="Controllers\Room\EditRoom.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\OrderService.cs" />
-    <Compile Include="Services\RoomCategoryService.cs" />
-    <Compile Include="Services\RoomService.cs" />
-    <Compile Include="Services\UserService.cs" />
-    <Compile Include="Utils\NinjectRegistrations .cs" />
-    <Compile Include="Validation\HotelException.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hotel.BLL\Hotel.BLL.csproj">
+      <Project>{EE7FFDAF-F09C-4106-A1DA-D60B0AFA0730}</Project>
+      <Name>Hotel.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hotel.DAL\Hotel.DAL.csproj">
       <Project>{AF5961B7-11F8-490C-9A72-CE70BE8FDC50}</Project>
       <Name>Hotel.DAL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

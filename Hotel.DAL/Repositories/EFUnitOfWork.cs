@@ -1,7 +1,6 @@
 ﻿using System;
 using Hotel.DAL.EF;
 using Hotel.DAL.Interfaces;
-using Hotel.DAL.Repositories.Hotel.DAL.Repositories;
 
 namespace Hotel.DAL.Repositories
 {
@@ -20,22 +19,50 @@ namespace Hotel.DAL.Repositories
 
         public IUserRepository Users
         {
-            get { return _userRepository ?? new UserRepository(_context); }
+            get
+            {
+                if (_userRepository == null)
+                {
+                    _userRepository = new UserRepository(_context);
+                }
+                return _userRepository;
+            }
         }
 
         public IOrderRepository Orders
         {
-            get { return _orderRepository ?? new OrderRepository(_context); }
+            get
+            {
+                if (_orderRepository == null)
+                {
+                    _orderRepository = new OrderRepository(_context);
+                }
+                return _orderRepository;
+            }
         }
 
         public IRoomRepository Rooms
         {
-            get { return _roomRepository ?? new RoomRepository(_context); }
+            get
+            {
+                if (_roomRepository == null)
+                {
+                    _roomRepository = new RoomRepository(_context);
+                }
+                return _roomRepository;
+            }
         }
 
         public IRoomCategoryRepository RoomCategories
         {
-            get { return _roomCategoryRepository ?? new RoomCategoryRepository(_context); }
+            get
+            {
+                if (_roomCategoryRepository == null)
+                {
+                    _roomCategoryRepository = new RoomCategoryRepository(_context);
+                }
+                return _roomCategoryRepository;
+            }
         }
 
         public void Save()
