@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.DAL", "Hotel.DAL\Hote
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{B99F5687-DF98-46FE-A5C8-02DD43F894F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.BLL", "Hotel.BLL\Hotel.BLL.csproj", "{EE7FFDAF-F09C-4106-A1DA-D60B0AFA0730}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B99F5687-DF98-46FE-A5C8-02DD43F894F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B99F5687-DF98-46FE-A5C8-02DD43F894F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B99F5687-DF98-46FE-A5C8-02DD43F894F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE7FFDAF-F09C-4106-A1DA-D60B0AFA0730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE7FFDAF-F09C-4106-A1DA-D60B0AFA0730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE7FFDAF-F09C-4106-A1DA-D60B0AFA0730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE7FFDAF-F09C-4106-A1DA-D60B0AFA0730}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
