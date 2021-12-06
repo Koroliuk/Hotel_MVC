@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Hotel.BLL.interfaces;
+using System;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,22 +7,33 @@ namespace Hotel.Web_MVC.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly IOrderService _orderService;
+
+        public HomeController(IOrderService orderService) : base()
         {
-            return View();
+            _orderService = orderService;
         }
 
-        public ActionResult About()
+        public HomeController()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Index(string startDateString=null, string endDateString=null)
         {
-            ViewBag.Message = "Your contact page.";
+            if (startDateString == null && endDateString == null)
+            {
+                return View();
+            }
 
+            var startDate = startDateString == null ? DateTime.MinValue : DateTime.Parse(startDateString);
+            var endDate = endDateString == null ? DateTime.MaxValue : DateTime.Parse(endDateString);
+
+            var rooms = _orderService.GetFreeRooms(startDate, endDate);
+            foreach (var room in rooms)
+            {
+                Console.WriteLine(room.Id);
+            }
+            ViewBag.Rooms = rooms;
             return View();
         }
     }

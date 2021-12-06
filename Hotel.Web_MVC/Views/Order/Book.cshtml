@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Book";
+}
+
+<div>
+    <div>
+        <p>Book room</p>
+    </div>
+    @{ var room = ViewBag.Room; }
+    <div>
+        <p>@room.RoomCategory.Name</p>
+        <p>@room.RoomCategory.Description</p>
+        <p>Amount of places: @room.RoomCategory.Capacity</p>
+        <p>Price per day: @room.RoomCategory.PricePerDay</p>
+    </div>
+    <div>
+        <form method="post" action="/Order/Book?roomId=@room.Id">
+            <label for="startDateString">Start date:</label>
+            <input type="date" id="startDate" name="startDateString"><br>
+            <label for="endDateString">End date:</label>
+            <input type="date" id="endDate" name="endDateString"><br>
+            <input type="radio" id="toPay" name="isPaid" value="true">
+            <label for="isPaid">To paid</label><br>
+            <input type="submit" value="Book">
+        </form>
+    </div>
+</div>
