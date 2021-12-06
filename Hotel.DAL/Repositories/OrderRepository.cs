@@ -19,7 +19,7 @@ namespace Hotel.DAL.Repositories
 
         public IEnumerable<Order> GetAll()
         {
-            return _context.Orders;
+            return _context.Orders.Include(o => o.Room.RoomCategory);
         }
 
         public Order Get(int id)

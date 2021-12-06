@@ -14,5 +14,7 @@ namespace Hotel.BLL.interfaces
         IEnumerable<Room> GetFreeRooms(DateTime startDate, DateTime endDate);
         Order FindById(int id);
         bool IsExistsById(int id);
+        IEnumerable<Order> GetAll();
+        void DeleteById(int id);
     }
 }

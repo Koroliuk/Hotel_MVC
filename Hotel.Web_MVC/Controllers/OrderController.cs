@@ -28,7 +28,7 @@ namespace Hotel.Web_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Book(int roomId, string startDateString, string endDateString, bool isPaid=false)
+        public RedirectResult Book(int roomId, string startDateString, string endDateString, bool isPaid=false)
         {
             var startDate = DateTime.Parse(startDateString);
             var endDate = DateTime.Parse(endDateString);
@@ -41,7 +41,32 @@ namespace Hotel.Web_MVC.Controllers
                 _orderService.RentRoomById(roomId, null, startDate, endDate);
 
             }
-            return Redirect("/Home/Index");
+            return Redirect("/Order/Success");
         }
+
+        public ActionResult Success()
+        {
+            return View();
+        }
+
+        public ActionResult List()
+        {
+            var orders = _orderService.GetAll();
+            ViewBag.Orders = orders;
+            return View();
+        }
+
+        public RedirectResult Rent(int orderId)
+        {
+            _orderService.TransformFromBookedToRentedById(orderId);
+            return Redirect("/Order/List");
+        }
+
+        public RedirectResult Cancel(int orderId)
+        {
+            _orderService.DeleteById(orderId);
+            return Redirect("/Order/List");
+        }
+
     }
 }

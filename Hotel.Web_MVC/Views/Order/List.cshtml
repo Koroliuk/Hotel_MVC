@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "List";
+}
+
+<div>
+    @if (ViewBag.Orders != null)
+    {
+        <table>
+            <tr>
+                <td>N0</td>
+                <td>Number of room</td>
+                <td>Start date</td>
+                <td>End date</td>
+                <td>Action</td>
+            </tr>
+            @foreach (var order in ViewBag.Orders)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.Room.Id</td>
+                    <td>@order.Start</td>
+                    <td>@order.End</td>
+                    <td>
+                        @if (order.Type == Hotel.DAL.Entities.OrderType.Booked)
+                        {
+                            var totalPrice = order.End.Subtract(order.Start).Days * order.Room.RoomCategory.PricePerDay; 
+                            <a href="/Order/Rent?orderId=@order.Id">Rent</a>
+                        }
+                        <a href="/Order/Cancel?orderId=@order.Id">Cancel</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>

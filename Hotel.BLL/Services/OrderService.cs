@@ -104,10 +104,10 @@ namespace Hotel.BLL.Services
             _unitOfWork.Orders.Update(order);
             _unitOfWork.Save();
 
-            if (order.Room.RoomCategory != null)
-            {
-                return order.End.Subtract(order.Start).Days * order.Room.RoomCategory.PricePerDay;
-            }
+            //if (order.Room.RoomCategory != null)
+            //{
+            //    return order.End.Subtract(order.Start).Days * order.Room.RoomCategory.PricePerDay;
+            //}
 
             return default;
         }
@@ -134,6 +134,17 @@ namespace Hotel.BLL.Services
         public bool IsExistsById(int id)
         {
             return FindById(id) != null;
+        }
+
+        public IEnumerable<Order> GetAll()
+        {
+            return _unitOfWork.Orders.GetAll();
+        }
+
+        public void DeleteById(int id)
+        {
+            _unitOfWork.Orders.Delete(id);
+            _unitOfWork.Save();
         }
     }
 }
