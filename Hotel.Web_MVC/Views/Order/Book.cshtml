@@ -15,7 +15,7 @@
         <p>Price per day: @room.RoomCategory.PricePerDay</p>
     </div>
     <div>
-        <form method="post" action="/Order/Book?roomId=@room.Id">
+        <form method="post" action="/room/@room.Id/book">
             <label for="startDateString">Start date:</label>
             <input type="date" id="startDate" name="startDateString"><br>
             <label for="endDateString">End date:</label>

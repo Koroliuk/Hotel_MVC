@@ -19,6 +19,7 @@ namespace Hotel.Web_MVC.Controllers
         {
         }
 
+        [Route("room/{roomId}/book")]
         [HttpGet]
         public ActionResult Book(int roomId)
         {
@@ -27,6 +28,7 @@ namespace Hotel.Web_MVC.Controllers
             return View();
         }
 
+        [Route("room/{roomId}/book")]
         [HttpPost]
         public RedirectResult Book(int roomId, string startDateString, string endDateString, bool isPaid=false)
         {
@@ -41,7 +43,7 @@ namespace Hotel.Web_MVC.Controllers
                 _orderService.RentRoomById(roomId, null, startDate, endDate);
 
             }
-            return Redirect("/Order/Success");
+            return Redirect("/orders");
         }
 
         public ActionResult Success()
@@ -56,16 +58,18 @@ namespace Hotel.Web_MVC.Controllers
             return View();
         }
 
-        public RedirectResult Rent(int orderId)
+        [Route("room/{orderId}/pay")]
+        public RedirectResult Pay(int orderId)
         {
             _orderService.TransformFromBookedToRentedById(orderId);
-            return Redirect("/Order/List");
+            return Redirect("/orders");
         }
 
+        [Route("room/{orderId}/cancel")]
         public RedirectResult Cancel(int orderId)
         {
             _orderService.DeleteById(orderId);
-            return Redirect("/Order/List");
+            return Redirect("/orders");
         }
 
     }

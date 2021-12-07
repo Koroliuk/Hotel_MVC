@@ -37,7 +37,8 @@
                         <td>@room.RoomCategory.PricePerDay</td>
                         <td>@room.RoomCategory.Capacity</td>
                         <td><a type="button" class="btn btn-primary btn-sm"
-                               href="/Order/Book?roomId=@room.Id">Book room</a></td>
+                               href="/room/@room.Id/book">Book room</a>
+                        </td>
                     </tr>
                 }
             </table>
