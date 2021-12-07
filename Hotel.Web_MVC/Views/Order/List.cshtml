@@ -1,14 +1,14 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "List";
 }
 
+@using Hotel.DAL.Entities
 <div>
     @if (ViewBag.Orders != null)
     {
         <table>
             <tr>
-                <td>N0</td>
+                <td>№</td>
                 <td>Number of room</td>
                 <td>Start date</td>
                 <td>End date</td>
@@ -22,10 +22,10 @@
                     <td>@order.Start</td>
                     <td>@order.End</td>
                     <td>
-                        @if (order.Type == Hotel.DAL.Entities.OrderType.Booked)
+                        @if (order.Type == OrderType.Booked)
                         {
                             var totalPrice = order.End.Subtract(order.Start).Days * order.Room.RoomCategory.PricePerDay; 
-                            <a href="/Order/Rent?orderId=@order.Id">Rent</a>
+                            <a href="/Order/Rent?orderId=@order.Id">Rent @totalPrice</a>
                         }
                         <a href="/Order/Cancel?orderId=@order.Id">Cancel</a>
                     </td>

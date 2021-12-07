@@ -1,22 +1,28 @@
-﻿<div>
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<div>
     <div>
-        <p>Hotel service</p>
+        <p>Hotel booking service</p>
     </div>
     <div>
         <p>Find free rooms:</p>
-        <form method="get" action="/Home/Index">
+        @Html.BeginForm("Index", "Home", FormMethod.Get))
+        {
             <label for="startDateString">Start date:</label>
             <input type="date" id="startDate" name="startDateString">
             <label for="endDateString">End date:</label>
             <input type="date" id="endDate" name="endDateString">
             <input type="submit" value="Find">
-        </form>
+        }
     </div>
     <div>
-        @if (ViewBag.Rooms != null) {
+        @if (ViewBag.Rooms != null)
+        {
             <table>
                 <tr>
-                    <td>N0</td>
+                    <td>№</td>
                     <td>Category name</td>
                     <td>Price per day</td>
                     <td>Capacity</td>
@@ -24,15 +30,19 @@
                 </tr>
                 @foreach (var room in ViewBag.Rooms)
                 {
-                <tr>
-                    <td>@room.Id</td>
-                    <td>@room.RoomCategory.Name</td>
-                    <td>@room.RoomCategory.PricePerDay</td>
-                    <td>@room.RoomCategory.Capacity</td>
-                    <td><a href="/Order/Book?roomId=@room.Id">Book room</a></td>
-                </tr>
+                    <tr>
+                        <td>@room.Id</td>
+                        <td>@room.RoomCategory.Name</td>
+                        <td>@room.RoomCategory.PricePerDay</td>
+                        <td>@room.RoomCategory.Capacity</td>
+                        <td><a href="/Order/Book?roomId=@room.Id">Book room</a></td>
+                    </tr>
                 }
             </table>
+        }
+        else
+        {
+            <p>There is no free rooms</p>
         }
     </div>
 </div>
