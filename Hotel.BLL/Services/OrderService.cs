@@ -19,9 +19,9 @@ namespace Hotel.BLL.Services
 
         public void BookRoomById(int roomId, User user, DateTime startDate, DateTime endDate)
         {
-            if (startDate <= DateTime.Now || startDate > endDate)
+            if (startDate.Date < DateTime.Now.Date || startDate > endDate)
             {
-                throw new HotelException("Invalid input");
+                throw new HotelException("Start date should be bigger or equal now and be less that end date");
             }
 
             var room = _unitOfWork.Rooms.FindById(roomId);
@@ -52,9 +52,9 @@ namespace Hotel.BLL.Services
 
         public decimal RentRoomById(int roomId, User user, DateTime startDate, DateTime endDate)
         {
-            if (startDate <= DateTime.Now || startDate > endDate)
+            if (startDate.Date < DateTime.Now.Date || startDate > endDate)
             {
-                throw new HotelException("Invalid input");
+                throw new HotelException("Start date should be bigger or equal now and be less that end date");
             }
 
             var room = _unitOfWork.Rooms.FindById(roomId);
@@ -114,9 +114,9 @@ namespace Hotel.BLL.Services
 
         public IEnumerable<Room> GetFreeRooms(DateTime startDate, DateTime endDate)
         {
-            if (startDate <= DateTime.Now || startDate > endDate)
+            if (startDate.Date < DateTime.Now.Date || startDate > endDate)
             {
-                throw new HotelException("Invalid input");
+                throw new HotelException("Start date should be bigger or equal now and be less that end date");
             }
 
             var occupiedRooms = _unitOfWork.Orders.Find(o => o.Start >= startDate && o.End <= endDate)

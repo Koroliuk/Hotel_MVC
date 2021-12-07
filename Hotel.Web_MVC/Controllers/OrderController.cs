@@ -1,4 +1,6 @@
 ﻿using Hotel.BLL.interfaces;
+using Hotel.BLL.Validation;
+using Hotel.Web_MVC.Utils;
 using System;
 using System.Web.Mvc;
 
@@ -32,18 +34,34 @@ namespace Hotel.Web_MVC.Controllers
         [HttpPost]
         public RedirectResult Book(int roomId, string startDateString, string endDateString, bool isPaid=false)
         {
-            var startDate = DateTime.Parse(startDateString);
-            var endDate = DateTime.Parse(endDateString);
-            if (isPaid)
+            if (StringUtils.IsBlank(startDateString) || StringUtils.IsBlank(endDateString))
             {
-                _orderService.BookRoomById(roomId, null, startDate, endDate);
+                TempData["Message"] = "Please provide input dates";
             }
-            else
+            try
             {
-                _orderService.RentRoomById(roomId, null, startDate, endDate);
+                var startDate = DateTime.Parse(startDateString);
+                var endDate = DateTime.Parse(endDateString);
+                if (!isPaid)
+                {
+                    _orderService.BookRoomById(roomId, null, startDate, endDate);
+                }
+                else
+                {
+                    _orderService.RentRoomById(roomId, null, startDate, endDate);
 
+                }
+                return Redirect("/orders");
             }
-            return Redirect("/orders");
+            catch (HotelException e)
+            {
+                TempData["Message"] = e.Message;
+            }
+            catch
+            {
+                TempData["Message"] = "Please, check input dates";
+            }
+            return Redirect(String.Format("/room/{0}/book", roomId));
         }
 
         public ActionResult Success()

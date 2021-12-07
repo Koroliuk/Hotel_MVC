@@ -1,4 +1,6 @@
 ﻿using Hotel.BLL.interfaces;
+using Hotel.BLL.Validation;
+using Hotel.Web_MVC.Utils;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -20,21 +22,43 @@ namespace Hotel.Web_MVC.Controllers
 
         public ActionResult Index(string startDateString=null, string endDateString=null)
         {
-            if (startDateString == null && endDateString == null)
+            bool isStartDateStringEmpty = StringUtils.IsBlank(startDateString);
+            bool isEndDateStringEmpty = StringUtils.IsBlank(endDateString);
+
+            if (isStartDateStringEmpty && isEndDateStringEmpty)
             {
                 return View();
             }
-
-            var startDate = startDateString == null ? DateTime.MinValue : DateTime.Parse(startDateString);
-            var endDate = endDateString == null ? DateTime.MaxValue : DateTime.Parse(endDateString);
-
-            var rooms = _orderService.GetFreeRooms(startDate, endDate);
-            foreach (var room in rooms)
+            try
             {
-                Console.WriteLine(room.Id);
+                var startDate = isStartDateStringEmpty ? DateTime.Now : DateTime.Parse(startDateString);
+                var endDate = isEndDateStringEmpty ? DateTime.MaxValue : DateTime.Parse(endDateString);
+                var rooms = _orderService.GetFreeRooms(startDate, endDate);
+                ViewBag.MessageSuccess = CalcSucessMessage(startDate, endDate);
+                ViewBag.Rooms = rooms;
+            } catch (HotelException e)
+            {
+                ViewBag.MessageError = e.Message;
             }
-            ViewBag.Rooms = rooms;
             return View();
+        }
+
+        private string CalcSucessMessage(DateTime startDate, DateTime endDate)
+        {
+            string from = "from now";
+            string to = "";
+
+            if (startDate.Date != DateTime.Now.Date)
+            {
+                from = String.Format("from {0}", startDate.ToString("yyyy-MM-dd"));
+            }
+
+            if (endDate.Date != DateTime.MaxValue.Date)
+            {
+                to = String.Format("to {0}", startDate.ToString("yyyy-MM-dd"));
+            }
+   
+            return String.Format("Free rooms {0} {1}", from, to);
         }
     }
 }
