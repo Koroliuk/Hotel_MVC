@@ -1,5 +1,4 @@
-﻿using Hotel.BLL.DTO;
-using Hotel.BLL.interfaces;
+﻿using Hotel.BLL.interfaces;
 using Hotel.BLL.Validation;
 using Hotel.DAL.Entities;
 using Hotel.DAL.Interfaces;
@@ -15,16 +14,14 @@ namespace Hotel.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public void Create(RoomDto roomDto)
+        public void Create(Room room)
         {
-            var roomCategory = _unitOfWork.RoomCategories.FindById(roomDto.CategoryId);
+            var roomCategory = _unitOfWork.RoomCategories.FindById(room.RoomCategoryId);
 
             if (roomCategory == null)
             {
-                throw new HotelException("Room category with id = " + roomDto.CategoryId + " was not found");
+                throw new HotelException("Room category with id = " + room.RoomCategoryId + " was not found");
             }
-
-            var room = new Room { RoomCategory = roomCategory };
 
             _unitOfWork.Rooms.Create(room);
             _unitOfWork.Save();
@@ -40,7 +37,7 @@ namespace Hotel.BLL.Services
             return FindById(id) != null;
         }
 
-        public void Update(int roomId, RoomDto roomDto)
+        public void Update(int roomId, Room newRoom)
         {
             var isRoomExists = IsExistById(roomId);
             if (!isRoomExists)
@@ -48,15 +45,10 @@ namespace Hotel.BLL.Services
                 throw new HotelException("There is no room room with id = " + roomId);
             }
 
-            var roomCategory = _unitOfWork.RoomCategories.FindById(roomDto.CategoryId);
-
-            if (roomCategory == null)
-            {
-                throw new HotelException("Room category with id = " + roomDto.CategoryId + " was not found");
-            }
-
+            var roomCategory = _unitOfWork.RoomCategories.FindById(newRoom.RoomCategoryId);
             var room = _unitOfWork.Rooms.FindById(roomId);
-            room.RoomCategory = roomCategory;
+            room.RoomCategory = roomCategory ?? 
+                throw new HotelException("Room category with id = " + newRoom.RoomCategoryId + " was not found");
 
             _unitOfWork.Rooms.Update(room);
             _unitOfWork.Save();

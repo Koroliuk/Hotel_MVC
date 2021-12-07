@@ -50,7 +50,7 @@ namespace Hotel.BLL.Services
             _unitOfWork.Save();
         }
 
-        public decimal RentRoomById(int roomId, User user, DateTime startDate, DateTime endDate)
+        public void RentRoomById(int roomId, User user, DateTime startDate, DateTime endDate)
         {
             if (startDate.Date < DateTime.Now.Date || startDate > endDate)
             {
@@ -81,16 +81,9 @@ namespace Hotel.BLL.Services
 
             _unitOfWork.Orders.Create(order);
             _unitOfWork.Save();
-
-            if (order.Room.RoomCategory != null)
-            {
-                return order.End.Subtract(order.Start).Days * order.Room.RoomCategory.PricePerDay;
-            }
-
-            return default;
         }
 
-        public decimal TransformFromBookedToRentedById(int id)
+        public void TransformFromBookedToRentedById(int id)
         {
             var order = FindById(id);
 
@@ -103,13 +96,6 @@ namespace Hotel.BLL.Services
 
             _unitOfWork.Orders.Update(order);
             _unitOfWork.Save();
-
-            //if (order.Room.RoomCategory != null)
-            //{
-            //    return order.End.Subtract(order.Start).Days * order.Room.RoomCategory.PricePerDay;
-            //}
-
-            return default;
         }
 
         public IEnumerable<Room> GetFreeRooms(DateTime startDate, DateTime endDate)

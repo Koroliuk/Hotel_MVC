@@ -88,9 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="DTO\RoomCategoryDto.cs" />
-    <Compile Include="DTO\RoomDto.cs" />
-    <Compile Include="DTO\UserDto.cs" />
     <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="Interfaces\IRoomCategoryService.cs" />
     <Compile Include="Interfaces\IRoomService.cs" />

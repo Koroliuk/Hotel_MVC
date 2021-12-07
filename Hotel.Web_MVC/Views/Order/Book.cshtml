@@ -9,13 +9,13 @@
     </div>
     @{ var room = ViewBag.Room; }
     <div>
-        <p>@room.RoomCategory.Name</p>
-        <p>@room.RoomCategory.Description</p>
-        <p>Amount of places: @room.RoomCategory.Capacity</p>
-        <p>Price per day: @room.RoomCategory.PricePerDay</p>
+        <p>@room.Category.Name</p>
+        <p>@room.Category.Description</p>
+        <p>Amount of places: @room.Category.Capacity</p>
+        <p>Price per day: @room.Category.PricePerDay</p>
     </div>
     <div>
-        <form method="post" action="/room/@room.Id/book">
+        <form method="post" action="/room/@room.RoomNumber/book">
             <label for="startDateString">Start date:</label>
             <input type="date" id="startDate" name="startDateString"><br>
             <label for="endDateString">End date:</label>

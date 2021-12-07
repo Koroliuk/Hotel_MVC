@@ -34,12 +34,12 @@
                 @foreach (var room in ViewBag.Rooms)
                 {
                     <tr>
-                        <td>@room.Id</td>
-                        <td>@room.RoomCategory.Name</td>
-                        <td>@room.RoomCategory.PricePerDay</td>
-                        <td>@room.RoomCategory.Capacity</td>
+                        <td>@room.RoomNumber</td>
+                        <td>@room.Category.Name</td>
+                        <td>@room.Category.PricePerDay</td>
+                        <td>@room.Category.Capacity</td>
                         <td><a type="button" class="btn btn-primary btn-sm"
-                               href="/room/@room.Id/book">Book room</a>
+                               href="/room/@room.RoomNumber/book">Book room</a>
                         </td>
                     </tr>
                 }

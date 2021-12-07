@@ -1,7 +1,9 @@
 ﻿using Hotel.BLL.interfaces;
 using Hotel.BLL.Validation;
+using Hotel.Web_MVC.Converter;
 using Hotel.Web_MVC.Utils;
 using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -33,7 +35,8 @@ namespace Hotel.Web_MVC.Controllers
             {
                 var startDate = isStartDateStringEmpty ? DateTime.Now : DateTime.Parse(startDateString);
                 var endDate = isEndDateStringEmpty ? DateTime.MaxValue : DateTime.Parse(endDateString);
-                var rooms = _orderService.GetFreeRooms(startDate, endDate);
+                var rooms = _orderService.GetFreeRooms(startDate, endDate)
+                    .Select(room => RoomConverter.Room2Dto(room));
                 ViewBag.MessageSuccess = CalcSucessMessage(startDate, endDate);
                 ViewBag.Rooms = rooms;
             } catch (HotelException e)

@@ -141,6 +141,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Converter\OrderConverter.cs" />
+    <Compile Include="Converter\RoomCategoryConverter.cs" />
+    <Compile Include="Converter\RoomConverter.cs" />
+    <Compile Include="DTO\OrderDto.cs" />
+    <Compile Include="DTO\RoomCategoryDto.cs" />
+    <Compile Include="DTO\RoomDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

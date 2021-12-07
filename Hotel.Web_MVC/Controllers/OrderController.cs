@@ -1,7 +1,9 @@
 ﻿using Hotel.BLL.interfaces;
 using Hotel.BLL.Validation;
+using Hotel.Web_MVC.Converter;
 using Hotel.Web_MVC.Utils;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Hotel.Web_MVC.Controllers
@@ -26,7 +28,8 @@ namespace Hotel.Web_MVC.Controllers
         public ActionResult Book(int roomId)
         {
             var room = _roomService.FindById(roomId);
-            ViewBag.Room = room;
+            var roomDto = RoomConverter.Room2Dto(room);
+            ViewBag.Room = roomDto;
             return View();
         }
 
@@ -64,14 +67,10 @@ namespace Hotel.Web_MVC.Controllers
             return Redirect(String.Format("/room/{0}/book", roomId));
         }
 
-        public ActionResult Success()
-        {
-            return View();
-        }
-
         public ActionResult List()
         {
-            var orders = _orderService.GetAll();
+            var orders = _orderService.GetAll()
+                .Select(order => OrderConverter.Order2Dto(order));
             ViewBag.Orders = orders;
             return View();
         }
