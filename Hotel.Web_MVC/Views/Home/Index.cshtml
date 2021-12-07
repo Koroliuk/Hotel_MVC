@@ -2,25 +2,26 @@
     ViewBag.Title = "Home";
 }
 
-<div>
+<div class="container text-center">
     <div>
-        <p>Hotel booking service</p>
+        <h3>Hotel booking service</h3>
     </div>
     <div>
         <p>Find free rooms:</p>
-        @Html.BeginForm("Index", "Home", FormMethod.Get))
+        @using(Html.BeginForm("Index", "Home", FormMethod.Get))
         {
             <label for="startDateString">Start date:</label>
-            <input type="date" id="startDate" name="startDateString">
+            <input type="date" id="startDate" name="startDateString"><br>
             <label for="endDateString">End date:</label>
-            <input type="date" id="endDate" name="endDateString">
-            <input type="submit" value="Find">
+            <input type="date" id="endDate" name="endDateString"><br>
+            <input type="submit" class="btn btn-primary" value="Find">
         }
+        <br>
     </div>
-    <div>
+    <div class="row justify-content-center">
         @if (ViewBag.Rooms != null)
         {
-            <table>
+            <table class="table table-responsive table-bordered table-hover">
                 <tr>
                     <td>№</td>
                     <td>Category name</td>
@@ -35,14 +36,11 @@
                         <td>@room.RoomCategory.Name</td>
                         <td>@room.RoomCategory.PricePerDay</td>
                         <td>@room.RoomCategory.Capacity</td>
-                        <td><a href="/Order/Book?roomId=@room.Id">Book room</a></td>
+                        <td><a type="button" class="btn btn-primary btn-sm"
+                               href="/Order/Book?roomId=@room.Id">Book room</a></td>
                     </tr>
                 }
             </table>
-        }
-        else
-        {
-            <p>There is no free rooms</p>
         }
     </div>
 </div>

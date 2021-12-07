@@ -3,9 +3,9 @@
     ViewBag.Title = "Book";
 }
 
-<div>
+<div class="container text-center">
     <div>
-        <p>Book room</p>
+        <h2>Book room</h2>
     </div>
     @{ var room = ViewBag.Room; }
     <div>
@@ -20,9 +20,10 @@
             <input type="date" id="startDate" name="startDateString"><br>
             <label for="endDateString">End date:</label>
             <input type="date" id="endDate" name="endDateString"><br>
-            <input type="radio" id="toPay" name="isPaid" value="true">
+            <input type="checkbox" id="toPay" name="isPaid" value="true">
             <label for="isPaid">To paid</label><br>
-            <input type="submit" value="Book">
+            <input type="submit" class="btn btn-primary btn-sm"
+                   value="Book">
         </form>
     </div>
 </div>
