@@ -11,13 +11,13 @@ namespace Hotel.Web_MVC
 
             routes.MapRoute(
                 name: "Pay order",
-                url: "room/{orderId}/pay",
+                url: "order/{orderId}/pay",
                 defaults: new { controller = "Order", action = "Pay" }
             );
 
             routes.MapRoute(
                 name: "Cancel order",
-                url: "room/{orderId}/cancel",
+                url: "order/{orderId}/cancel",
                 defaults: new { controller = "Order", action = "Cancel" }
             );
 

@@ -28,10 +28,10 @@
                             {
                                 var totalPrice = order.End.Subtract(order.Start).Days * order.Room.Category.PricePerDay; 
                                 <a type="button" class="btn btn-success btn-sm"
-                                   href="/room/@order.OrderNumber/pay">Pay @totalPrice</a>
+                                   href="/order/@order.OrderNumber/pay">Pay @totalPrice</a>
                             }
                             <a type="button" class="btn btn-danger btn-sm"
-                               href="/room/@order.OrderNumber/cancel">Cancel</a>
+                               href="/order/@order.OrderNumber/cancel">Cancel</a>
                         </td>
                     </tr>
                 }
