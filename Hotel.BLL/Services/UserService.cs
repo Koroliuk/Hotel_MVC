@@ -1,5 +1,4 @@
-﻿using Hotel.BLL.DTO;
-using Hotel.BLL.interfaces;
+﻿using Hotel.BLL.interfaces;
 using Hotel.BLL.Validation;
 using Hotel.DAL.Entities;
 using Hotel.DAL.Interfaces;
@@ -15,30 +14,18 @@ namespace Hotel.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public void SignUp(UserDto userDto)
+        public void SignUp(User user)
         {
-            if (userDto.Login == null || userDto.Login.Equals(string.Empty) ||
-                userDto.PasswordHash == null || userDto.PasswordHash.Equals(string.Empty) ||
-                userDto.Role == null || userDto.Role.Equals(string.Empty))
+            if (user.Login == null || user.Login.Equals(string.Empty) ||
+                user.PasswordHash == null || user.PasswordHash.Equals(string.Empty) ||
+                user.Role.Equals(string.Empty))
             {
                 throw new HotelException("Invalid input");
             }
-            if (userDto.Role != "Admin" && userDto.Role != "User")
-            {
-                throw new HotelException("Invalid user role");
-            }
-
-            if (IsExistByLogin(userDto.Login))
+            if (IsExistByLogin(user.Login))
             {
                 throw new HotelException("User with a such login is already exists");
             }
-
-            var user = new User
-            {
-                Login = userDto.Login,
-                PasswordHash = userDto.PasswordHash,
-                Role = userDto.Role == "Admin" ? UserRole.Admin : UserRole.User
-            };
 
             _unitOfWork.Users.Create(user);
             _unitOfWork.Save();

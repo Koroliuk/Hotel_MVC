@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<div class="container text-center">
+    <div>
+        <h3>Hotel booking service</h3>
+    </div>
+    <div>
+        <p>Find free rooms:</p>
+        @using(Html.BeginForm("Index", "Home", FormMethod.Get))
+        {
+            <label for="startDateString">Start date:</label>
+            <input type="date" id="startDate" name="startDateString"><br>
+            <label for="endDateString">End date:</label>
+            <input type="date" id="endDate" name="endDateString"><br>
+            <input type="submit" class="btn btn-primary" value="Find">
+        }
+        <br>
+        <snap style="color: red">@ViewBag.MessageError</snap>
+    </div>
+    <div class="row justify-content-center">
+        <p>@ViewBag.MessageSuccess</p>
+        @if (ViewBag.Rooms != null)
+        {
+            <table class="table table-responsive table-bordered table-hover">
+                <tr>
+                    <td>№</td>
+                    <td>Category name</td>
+                    <td>Price per day</td>
+                    <td>Capacity</td>
+                    <td>Action</td>
+                </tr>
+                @foreach (var room in ViewBag.Rooms)
+                {
+                    <tr>
+                        <td>@room.RoomNumber</td>
+                        <td>@room.Category.Name</td>
+                        <td>@room.Category.PricePerDay</td>
+                        <td>@room.Category.Capacity</td>
+                        <td><a type="button" class="btn btn-primary btn-sm"
+                               href="/room/@room.RoomNumber/book">Book room</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>

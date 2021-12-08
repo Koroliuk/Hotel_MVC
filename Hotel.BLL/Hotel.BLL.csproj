@@ -88,9 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="DTO\RoomCategoryDto.cs" />
-    <Compile Include="DTO\RoomDto.cs" />
-    <Compile Include="DTO\UserDto.cs" />
     <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="Interfaces\IRoomCategoryService.cs" />
     <Compile Include="Interfaces\IRoomService.cs" />
@@ -110,7 +107,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

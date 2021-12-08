@@ -1,5 +1,4 @@
-﻿using Hotel.BLL.DTO;
-using Hotel.BLL.interfaces;
+﻿using Hotel.BLL.interfaces;
 using Hotel.BLL.Validation;
 using Hotel.DAL.Entities;
 using Hotel.DAL.Interfaces;
@@ -15,22 +14,14 @@ namespace Hotel.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public void Create(RoomCategoryDto roomCategoryDto)
+        public void Create(RoomCategory roomCategory)
         {
-            if (roomCategoryDto.Name == null || roomCategoryDto.Name.Equals(string.Empty) ||
-                roomCategoryDto.Description == null || roomCategoryDto.Capacity <= 0 ||
-                roomCategoryDto.PricePerDay <= 0)
+            if (roomCategory.Name == null || roomCategory.Name.Equals(string.Empty) ||
+                roomCategory.Description == null || roomCategory.Capacity <= 0 ||
+                roomCategory.PricePerDay <= 0)
             {
                 throw new HotelException("Invalid input");
             }
-
-            var roomCategory = new RoomCategory
-            {
-                Name = roomCategoryDto.Name,
-                PricePerDay = roomCategoryDto.PricePerDay,
-                Capacity = roomCategoryDto.Capacity,
-                Description = roomCategoryDto.Description
-            };
 
             _unitOfWork.RoomCategories.Create(roomCategory);
             _unitOfWork.Save();
@@ -46,20 +37,20 @@ namespace Hotel.BLL.Services
             return FindById(id) != null;
         }
 
-        public void Update(int categoryId, RoomCategoryDto roomCategoryDto)
+        public void Update(int categoryId, RoomCategory newRoomCategory)
         {
-            if (roomCategoryDto.Name == null || roomCategoryDto.Name.Equals(string.Empty) ||
-                roomCategoryDto.Description == null || roomCategoryDto.Capacity == 0 ||
-                roomCategoryDto.PricePerDay == 0)
+            if (newRoomCategory.Name == null || newRoomCategory.Name.Equals(string.Empty) ||
+                newRoomCategory.Description == null || newRoomCategory.Capacity == 0 ||
+                newRoomCategory.PricePerDay == 0)
             {
                 throw new HotelException("Invalid input");
             }
 
             var roomCategory = FindById(categoryId);
-            roomCategory.Name = roomCategoryDto.Name;
-            roomCategory.PricePerDay = roomCategoryDto.PricePerDay;
-            roomCategory.Capacity = roomCategoryDto.Capacity;
-            roomCategory.Description = roomCategoryDto.Description;
+            roomCategory.Name = newRoomCategory.Name;
+            roomCategory.PricePerDay = newRoomCategory.PricePerDay;
+            roomCategory.Capacity = newRoomCategory.Capacity;
+            roomCategory.Description = newRoomCategory.Description;
 
             _unitOfWork.RoomCategories.Update(roomCategory);
             _unitOfWork.Save();

@@ -10,6 +10,11 @@ namespace Hotel.DAL.EF
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomCategory> RoomCategories { get; set; }
 
+        static HotelContext()
+        {
+            Database.SetInitializer<HotelContext>(new HotelContextInitializer());
+        }
+
         public HotelContext() : base("DBConnection")
         {
         }

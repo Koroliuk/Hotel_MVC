@@ -19,7 +19,7 @@ namespace Hotel.DAL.Repositories
 
         public IEnumerable<Order> GetAll()
         {
-            return _context.Orders;
+            return _context.Orders.Include(o => o.Room.RoomCategory);
         }
 
         public Order Get(int id)
@@ -29,7 +29,7 @@ namespace Hotel.DAL.Repositories
 
         public IEnumerable<Order> Find(Func<Order, bool> predicate)
         {
-            return _context.Orders.Where(predicate).ToList();
+            return _context.Orders.Include(o => o.Room).Where(predicate).ToList();
         }
 
         public void Create(Order item)

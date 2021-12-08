@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "List";
+}
+
+@using Hotel.DAL.Entities
+<br>
+<div class="container text-center">
+    <div class="row justify-content-center">
+        @if (ViewBag.Orders != null)
+        {
+            <table class="table table-responsive table-bordered table-hover">
+                <tr>
+                    <td>№</td>
+                    <td>Number of room</td>
+                    <td>Start date</td>
+                    <td>End date</td>
+                    <td>Action</td>
+                </tr>
+                @foreach (var order in ViewBag.Orders)
+                {
+                    <tr>
+                        <td>@order.OrderNumber</td>
+                        <td>@order.Room.RoomNumber</td>
+                        <td>@(order.Start.ToString("yyyy-MM-dd"))</td>
+                        <td>@order.End.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            @if (order.Type == OrderType.Booked)
+                            {
+                                var totalPrice = order.End.Subtract(order.Start).Days * order.Room.Category.PricePerDay; 
+                                <a type="button" class="btn btn-success btn-sm"
+                                   href="/room/@order.OrderNumber/pay">Pay @totalPrice</a>
+                            }
+                            <a type="button" class="btn btn-danger btn-sm"
+                               href="/room/@order.OrderNumber/cancel">Cancel</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>

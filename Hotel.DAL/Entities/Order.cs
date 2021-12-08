@@ -15,7 +15,7 @@ namespace Hotel.DAL.Entities
         [Required]
         public OrderType Type { get; set; }
         public string UserLogin { get; set; }
-        [Required, ForeignKey("UserLogin")]
+        [ForeignKey("UserLogin")]
         public User User { get; set; }
         public int RoomId { get; set; }
         [Required, ForeignKey("RoomId")]

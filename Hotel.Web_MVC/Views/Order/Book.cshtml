@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Book";
+}
+
+<div class="container text-center">
+    <div>
+        <h2>Book room</h2>
+    </div>
+    @{ var room = ViewBag.Room; }
+    <div>
+        <p>@room.Category.Name</p>
+        <p>@room.Category.Description</p>
+        <p>Amount of places: @room.Category.Capacity</p>
+        <p>Price per day: @room.Category.PricePerDay</p>
+    </div>
+    <div>
+        <form method="post" action="/room/@room.RoomNumber/book">
+            <label for="startDateString">Start date:</label>
+            <input type="date" id="startDate" name="startDateString"><br>
+            <label for="endDateString">End date:</label>
+            <input type="date" id="endDate" name="endDateString"><br>
+            <input type="checkbox" id="toPay" name="isPaid" value="true">
+            <label for="isPaid">To paid</label><br>
+            <input type="submit" class="btn btn-primary btn-sm"
+                   value="Book">
+            <br>
+            <snap style="color: red">@TempData["Message"]</snap>
+        </form>
+    </div>
+</div>

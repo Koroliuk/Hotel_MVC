@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\HotelContext.cs" />
+    <Compile Include="EF\HotelContextInitializer.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Entities\RoomCategory.cs" />
